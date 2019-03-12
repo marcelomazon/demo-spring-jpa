@@ -71,9 +71,12 @@ public class UserController {
     @RequestMapping("users/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) throws EntityNotFoundException {
         User user = userRepository.findByEmail(email);
-                        //.orElseThrow(() -> new EntityNotFoundException("E-mail não encontrado: " + email));
         return ResponseEntity.ok().body(user);
+    }
 
+    @RequestMapping("users/busca/{busca}")
+    public List<User> getUsersByTermoBusca(@PathVariable(value = "busca") String termoBusca) throws EntityNotFoundException {
+        return userRepository.findByTermoBusca(termoBusca);
     }
 
 }
