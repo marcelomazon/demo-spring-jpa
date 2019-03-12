@@ -1,6 +1,6 @@
 package com.mazon.demo;
 
-import com.mazon.user.User;
+import com.mazon.demo.user.User;
 import javafx.application.Application;
 import org.junit.Assert;
 import org.junit.Test;

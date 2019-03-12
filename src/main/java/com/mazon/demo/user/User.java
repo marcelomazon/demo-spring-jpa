@@ -1,4 +1,4 @@
-package com.mazon.user;
+package com.mazon.demo.user;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
