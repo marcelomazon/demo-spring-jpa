@@ -1,8 +1,9 @@
 package com.mazon.demo.user;
 
-import com.mazon.demo.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {}
+public interface UserRepository extends JpaRepository<User, Long> {
+    public User findByEmail(String email);
+}

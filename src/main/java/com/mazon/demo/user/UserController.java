@@ -29,7 +29,7 @@ public class UserController {
                 userRepository
                         .findById(userId)
                         .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado: " + userId));
-                        // new ResourceNotFoundException("Usuário não encontrado: " + userId));
+        // new ResourceNotFoundException("Usuário não encontrado: " + userId));
         return ResponseEntity.ok().body(user);
 
     }
@@ -43,11 +43,11 @@ public class UserController {
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails)
-        throws EntityNotFoundException {
+            throws EntityNotFoundException {
 
         User user = userRepository
                 .findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado para atualizar: "+userId));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado para atualizar: " + userId));
 
         user.setNome(userDetails.getNome());
         user.setEmail(userDetails.getEmail());
@@ -58,14 +58,22 @@ public class UserController {
     }
 
     @DeleteMapping("users/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws RuntimeException{
+    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws RuntimeException {
         User user = userRepository
                 .findById(userId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado para excluir: "+userId));
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado para excluir: " + userId));
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @RequestMapping("users/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) throws EntityNotFoundException {
+        User user = userRepository.findByEmail(email);
+                        //.orElseThrow(() -> new EntityNotFoundException("E-mail não encontrado: " + email));
+        return ResponseEntity.ok().body(user);
+
     }
 
 }
