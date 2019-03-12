@@ -58,10 +58,10 @@ public class UserController {
     }
 
     @DeleteMapping("users/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws Exception{
+    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws RuntimeException{
         User user = userRepository
                 .findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado para excluir: "+userId));
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado para excluir: "+userId));
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
