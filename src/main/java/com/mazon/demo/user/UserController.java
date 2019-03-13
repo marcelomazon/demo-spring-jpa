@@ -70,13 +70,20 @@ public class UserController {
 
     @RequestMapping("users/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) throws EntityNotFoundException {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository
+                .findByEmailLike(email)
+                .orElseThrow(() -> new RuntimeException("E-mail não encontrado"));
         return ResponseEntity.ok().body(user);
     }
 
     @RequestMapping("users/busca/{busca}")
-    public List<User> getUsersByTermoBusca(@PathVariable(value = "busca") String termoBusca) throws EntityNotFoundException {
+    public List<User> getUsersByTermoBusca(@PathVariable("busca") String termoBusca) throws EntityNotFoundException {
         return userRepository.findByTermoBusca(termoBusca);
     }
 
+    @RequestMapping("users/nome/{nome}")
+    public List<Object[]> getUsersByNome(@PathVariable(value = "nome") String nome) throws EntityNotFoundException {
+        return userRepository.findByAsArray(nome);
+
+    }
 }

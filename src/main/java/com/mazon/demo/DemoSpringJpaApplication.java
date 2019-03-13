@@ -8,7 +8,7 @@ public class DemoSpringJpaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoSpringJpaApplication.class, args);
-		System.out.println("DemoSpringJpaApplication.main");
+		System.out.println("Hola");
 	}
 
 }
