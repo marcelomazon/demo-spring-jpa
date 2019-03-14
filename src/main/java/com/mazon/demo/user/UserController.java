@@ -82,8 +82,13 @@ public class UserController {
     }
 
     @RequestMapping("users/nome/{nome}")
-    public List<Object[]> getUsersByNome(@PathVariable(value = "nome") String nome) throws EntityNotFoundException {
-        return userRepository.findByAsArray(nome);
+    public List<UserPart> getUsersByNome(@PathVariable(value = "nome") String nome) throws EntityNotFoundException {
+        List<Object[]> listaUsers = userRepository.findUserByAsArray(nome);
+
+        UsersView usersView = new UsersView();
+        usersView.setListaUsersView(listaUsers);
+
+        return usersView.getListaUsersView();
 
     }
 }

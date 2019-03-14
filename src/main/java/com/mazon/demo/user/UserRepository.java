@@ -20,8 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public List<User> findByTermoBusca(@Param("busca") String busca);
 
     @Query(value = "SELECT id, nome FROM user WHERE nome LIKE CONCAT('%',:nome, '%')",
-            countQuery = "select count(*) from user where nome LIKE CONCAT('%',:nome, '%')",
+            //countQuery = "select count(*) from user where nome LIKE CONCAT('%',:nome, '%')",
             nativeQuery = true)
-    List<Object[]> findByAsArray(@Param("nome") String nome);
+    List<Object[]> findUserByAsArray(@Param("nome") String nome);
 
 }
