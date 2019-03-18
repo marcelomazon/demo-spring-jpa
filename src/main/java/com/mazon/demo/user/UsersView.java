@@ -12,7 +12,7 @@ public class UsersView {
     }
 
     public List<UserPart> getListaUsersView(){
-        return content;
+        return this.content;
     }
 
     public void setListaUsersView(List<Object[]> listaUsers){
@@ -25,7 +25,7 @@ public class UsersView {
                     UserPart userPart = new UserPart();
                     userPart.setId(Long.parseLong(item[0].toString()));
                     userPart.setNome(item[1].toString());
-                    content.add(userPart);
+                    this.content.add(userPart);
                 }
             });
         }
